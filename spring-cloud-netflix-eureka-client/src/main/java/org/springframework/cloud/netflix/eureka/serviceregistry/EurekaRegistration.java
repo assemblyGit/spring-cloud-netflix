@@ -39,7 +39,7 @@ import org.springframework.cloud.netflix.eureka.InstanceInfoFactory;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.util.Assert;
 
-/**
+/**    <p>被ServiceRegistry使用,Eureka特定实现的service instance</p>
  * Eureka-specific implementation of service instance {@link Registration}.
  *
  * @author Spencer Gibb

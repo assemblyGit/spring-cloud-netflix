@@ -43,7 +43,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
-/**
+/**    <p>使用基于服务发现的ribbon clients</p>
  * Preprocessor that configures defaults for eureka-discovered ribbon clients. Such as:
  * <code>@zone</code>, NIWSServerListClassName, DeploymentContextBasedVipAddresses,
  * NFLoadBalancerRuleClassName, NIWSServerListFilterClassName and more
@@ -61,7 +61,7 @@ public class EurekaRibbonClientConfiguration {
 	@Value("${ribbon.eureka.approximateZoneFromHostname:false}")
 	private boolean approximateZoneFromHostname = false;
 
-	@RibbonClientName
+	@RibbonClientName//ribbon.client.name
 	private String serviceId = "client";
 
 	@Autowired(required = false)
@@ -91,7 +91,7 @@ public class EurekaRibbonClientConfiguration {
 		if (this.propertiesFactory.isSet(IPing.class, serviceId)) {
 			return this.propertiesFactory.get(IPing.class, config, serviceId);
 		}
-		NIWSDiscoveryPing ping = new NIWSDiscoveryPing();
+		NIWSDiscoveryPing ping = new NIWSDiscoveryPing();//根据loadbalancer不真正执行ping
 		ping.initWithNiwsConfig(config);
 		return ping;
 	}
@@ -101,7 +101,7 @@ public class EurekaRibbonClientConfiguration {
 	public ServerList<?> ribbonServerList(IClientConfig config,
 			Provider<EurekaClient> eurekaClientProvider) {
 		if (this.propertiesFactory.isSet(ServerList.class, serviceId)) {
-			return this.propertiesFactory.get(ServerList.class, config, serviceId);
+			return this.propertiesFactory.get(ServerList.class, config, serviceId);//
 		}
 		DiscoveryEnabledNIWSServerList discoveryServerList = new DiscoveryEnabledNIWSServerList(
 				config, eurekaClientProvider);

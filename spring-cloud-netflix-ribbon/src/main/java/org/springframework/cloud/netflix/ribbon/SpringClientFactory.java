@@ -27,20 +27,20 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.cloud.context.named.NamedContextFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-/**
+/**    <p>factory 创建client,load balancer,和client configuration 实例,为每个client name创建一个Spring Application Context</p>
  * A factory that creates client, load balancer and client configuration instances. It
  * creates a Spring ApplicationContext per client name, and extracts the beans that it
  * needs from there.
- *
+ *     <p>RibbonClientSpecification实现NamedContextFactory.Specification,在创建ApplicationContext的时候,如果RibbonClientSpecification和ApplicationContext对应的name一致 或者default,会将RibbonClientSpecification注册到ApplicationContext</p>
  * @author Spencer Gibb
  * @author Dave Syer
  */
 public class SpringClientFactory extends NamedContextFactory<RibbonClientSpecification> {
 
 	static final String NAMESPACE = "ribbon";
-
+    //RibbonClientConfiguration 当作ribbon.client.name对应的ApplicationContext的 ConfiguretionClass
 	public SpringClientFactory() {
-		super(RibbonClientConfiguration.class, NAMESPACE, "ribbon.client.name");
+		super(RibbonClientConfiguration.class, NAMESPACE, "ribbon.client.name");//在ApplicationContext中通过${ribbon.client.name} 变量,能获取ApplicationContext per client name
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class SpringClientFactory extends NamedContextFactory<RibbonClientSpecifi
 
 	@Override
 	public <C> C getInstance(String name, Class<C> type) {
-		C instance = super.getInstance(name, type);
+		C instance = super.getInstance(name, type);//在name对应的context中获取class对应的实例
 		if (instance != null) {
 			return instance;
 		}
@@ -128,7 +128,7 @@ public class SpringClientFactory extends NamedContextFactory<RibbonClientSpecifi
 
 	@Override
 	protected AnnotationConfigApplicationContext getContext(String name) {
-		return super.getContext(name);
+		return super.getContext(name);//如果context不存在会创建新的annotationContext
 	}
 
 }

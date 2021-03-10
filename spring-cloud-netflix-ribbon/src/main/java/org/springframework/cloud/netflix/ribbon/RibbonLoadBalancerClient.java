@@ -92,7 +92,7 @@ public class RibbonLoadBalancerClient implements LoadBalancerClient {
 		return new RibbonServer(serviceId, server, isSecure(server, serviceId),
 				serverIntrospector(serviceId).getMetadata(server));
 	}
-
+    /*在Spring boot下serviceId = uri.host()*/
 	@Override
 	public <T> T execute(String serviceId, LoadBalancerRequest<T> request)
 			throws IOException {
@@ -113,7 +113,7 @@ public class RibbonLoadBalancerClient implements LoadBalancerClient {
 	 */
 	public <T> T execute(String serviceId, LoadBalancerRequest<T> request, Object hint)
 			throws IOException {
-		ILoadBalancer loadBalancer = getLoadBalancer(serviceId);
+		ILoadBalancer loadBalancer = getLoadBalancer(serviceId);//每个域名一个负载均衡
 		Server server = getServer(loadBalancer, hint);
 		if (server == null) {
 			throw new IllegalStateException("No instances available for " + serviceId);

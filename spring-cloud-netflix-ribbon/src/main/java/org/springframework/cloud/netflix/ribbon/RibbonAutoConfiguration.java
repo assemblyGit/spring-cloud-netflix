@@ -60,7 +60,7 @@ import org.springframework.web.client.RestTemplate;
 @Conditional(RibbonAutoConfiguration.RibbonClassesConditions.class)
 @RibbonClients
 @AutoConfigureAfter(name = "org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration")
-@AutoConfigureBefore({ LoadBalancerAutoConfiguration.class,
+@AutoConfigureBefore({ LoadBalancerAutoConfiguration.class,  //LoadBalancerAutoConfiguration 参见Spring cloud common
 		AsyncLoadBalancerAutoConfiguration.class })
 @EnableConfigurationProperties({ RibbonEagerLoadProperties.class,
 		ServerIntrospectorProperties.class })
@@ -85,7 +85,7 @@ public class RibbonAutoConfiguration {
 	}
 
 	@Bean
-	@ConditionalOnMissingBean(LoadBalancerClient.class)
+	@ConditionalOnMissingBean(LoadBalancerClient.class)  //LoadBalancerClient 表示客户端 负载均衡
 	public LoadBalancerClient loadBalancerClient() {
 		return new RibbonLoadBalancerClient(springClientFactory());
 	}

@@ -41,7 +41,7 @@ import org.springframework.context.annotation.Import;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface RibbonClient {
+public @interface RibbonClient {//注册的bean为RibbonClientSpecification
 
 	/**
 	 * Synonym for name (the name of the client).

@@ -34,7 +34,7 @@ public class InstanceInfoFactory {
 	private static final Log log = LogFactory.getLog(InstanceInfoFactory.class);
 
 	public InstanceInfo create(EurekaInstanceConfig config) {
-		LeaseInfo.Builder leaseInfoBuilder = LeaseInfo.Builder.newBuilder()
+		LeaseInfo.Builder leaseInfoBuilder = LeaseInfo.Builder.newBuilder()//租赁信息
 				.setRenewalIntervalInSecs(config.getLeaseRenewalIntervalInSeconds())
 				.setDurationInSecs(config.getLeaseExpirationDurationInSeconds());
 

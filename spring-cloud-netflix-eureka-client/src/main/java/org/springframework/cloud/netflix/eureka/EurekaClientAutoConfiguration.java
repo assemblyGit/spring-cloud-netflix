@@ -265,7 +265,7 @@ public class EurekaClientAutoConfiguration {
 		private ApplicationContext context;
 
 		@Autowired
-		private AbstractDiscoveryClientOptionalArgs<?> optionalArgs;
+		private AbstractDiscoveryClientOptionalArgs<?> optionalArgs;//参见DiscoveryClientOptionalArgsConfiguration
 
 		@Bean(destroyMethod = "shutdown")
 		@ConditionalOnMissingBean(value = EurekaClient.class, search = SearchStrategy.CURRENT)
@@ -277,7 +277,7 @@ public class EurekaClientAutoConfiguration {
 
 		@Bean
 		@ConditionalOnMissingBean(value = ApplicationInfoManager.class, search = SearchStrategy.CURRENT)
-		public ApplicationInfoManager eurekaApplicationInfoManager(
+		public ApplicationInfoManager eurekaApplicationInfoManager(//创建ApplicationInfoManage
 				EurekaInstanceConfig config) {
 			InstanceInfo instanceInfo = new InstanceInfoFactory().create(config);
 			return new ApplicationInfoManager(config, instanceInfo);

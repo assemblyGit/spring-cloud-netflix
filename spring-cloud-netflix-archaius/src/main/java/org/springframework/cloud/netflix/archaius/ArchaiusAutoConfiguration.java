@@ -101,7 +101,7 @@ public class ArchaiusAutoConfiguration {
 	public static ConfigurableEnvironmentConfiguration configurableEnvironmentConfiguration(
 			ConfigurableEnvironment env, ApplicationContext context) {
 		Map<String, AbstractConfiguration> abstractConfigurationMap = context
-				.getBeansOfType(AbstractConfiguration.class);
+				.getBeansOfType(AbstractConfiguration.class);//获取所有这个类型的bean
 		List<AbstractConfiguration> externalConfigurations = new ArrayList<>(
 				abstractConfigurationMap.values());
 		ConfigurableEnvironmentConfiguration envConfig = new ConfigurableEnvironmentConfiguration(
@@ -167,7 +167,7 @@ public class ArchaiusAutoConfiguration {
 
 	private static void addArchaiusConfiguration(
 			ConcurrentCompositeConfiguration config) {
-		if (ConfigurationManager.isConfigurationInstalled()) {
+		if (ConfigurationManager.isConfigurationInstalled()) {//已经客户自定义了
 			AbstractConfiguration installedConfiguration = ConfigurationManager
 					.getConfigInstance();
 			if (installedConfiguration instanceof ConcurrentCompositeConfiguration) {

@@ -58,7 +58,7 @@ public class PropertiesFactory {
 		if (this.classToProperty.containsKey(clazz)) {
 			String classNameProperty = this.classToProperty.get(clazz);
 			String className = environment
-					.getProperty(name + "." + NAMESPACE + "." + classNameProperty);
+					.getProperty(name + "." + NAMESPACE + "." + classNameProperty);//client.ribbon.NIWSServerListClassName
 			return className;
 		}
 		return null;

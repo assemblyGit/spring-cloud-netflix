@@ -40,6 +40,6 @@ public @interface RibbonClients {
 
 	RibbonClient[] value() default {};
 
-	Class<?>[] defaultConfiguration() default {};
+	Class<?>[] defaultConfiguration() default {};//注册的bean为RibbonClientSpecification
 
 }

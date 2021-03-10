@@ -54,7 +54,7 @@ public @interface ConditionalOnRibbonAndEurekaEnabled {
 		@ConditionalOnClass(DiscoveryEnabledNIWSServerList.class)
 		@ConditionalOnBean(SpringClientFactory.class)
 		@ConditionalOnProperty(value = "ribbon.eureka.enabled", matchIfMissing = true)
-		static class Defaults {
+		static class Defaults {//ribbon.eureka.enabled 选项为false,不启用eureka的服务发现机制
 
 		}
 
